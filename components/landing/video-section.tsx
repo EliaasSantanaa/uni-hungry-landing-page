@@ -11,9 +11,10 @@ import {
 import { motion } from "framer-motion"
 
 const VIDEO_CONFIG = {
-  videoId: "COLOQUE_O_ID_DO_VIDEO_AQUI",
+  videoId: "8msJkhV47LI",
   type: "youtube" as "youtube" | "drive",
-  driveLink: "https://drive.google.com/drive/folders/SEU_LINK_AQUI",
+  watchUrl: "https://www.youtube.com/watch?v=8msJkhV47LI",
+  thumbnailUrl: "https://img.youtube.com/vi/8msJkhV47LI/maxresdefault.jpg",
 }
 
 export function VideoSection() {
@@ -42,17 +43,23 @@ export function VideoSection() {
         <SectionReveal delay={0.15} variants={scaleIn} className="max-w-4xl mx-auto">
           <div className="relative aspect-video rounded-2xl overflow-hidden bg-card border border-border hover:border-primary/40 transition-colors duration-300">
             {!isPlaying ? (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-card to-background">
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${VIDEO_CONFIG.thumbnailUrl})` }}
+                  aria-hidden
+                />
+                <div className="absolute inset-0 bg-background/60" aria-hidden />
                 <motion.button
                   whileHover={{ scale: 1.08 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setIsPlaying(true)}
-                  className="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30"
+                  className="relative z-10 w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30"
                   aria-label="Reproduzir vídeo"
                 >
                   <Play className="w-8 h-8 text-primary-foreground ml-1" />
                 </motion.button>
-                <p className="mt-4 text-muted-foreground text-sm">
+                <p className="relative z-10 mt-4 text-foreground text-sm font-medium">
                   Clique para reproduzir o vídeo pitch
                 </p>
               </div>
@@ -69,9 +76,9 @@ export function VideoSection() {
 
           <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button asChild variant="outline" className="gap-2">
-              <Link href={VIDEO_CONFIG.driveLink} target="_blank" rel="noopener noreferrer">
+              <Link href={VIDEO_CONFIG.watchUrl} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-4 h-4" />
-                Abrir no Google Drive
+                Abrir no YouTube
               </Link>
             </Button>
           </div>
