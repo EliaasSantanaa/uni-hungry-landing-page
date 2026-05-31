@@ -10,6 +10,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "opengraph.githubassets.com",
       },
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+      },
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
+      },
     ],
   },
 }

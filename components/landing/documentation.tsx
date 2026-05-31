@@ -1,10 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { FileText, ExternalLink, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import { FileText, ChevronRight } from "lucide-react"
 import { projectDocuments } from "@/lib/constants/documents"
+import { PdfViewerDialog } from "@/components/landing/pdf-viewer-dialog"
 import {
   SectionReveal,
   StaggerContainer,
@@ -30,95 +29,60 @@ export function Documentation() {
           </p>
         </SectionReveal>
 
-        <StaggerContainer className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {projectDocuments.map((doc) => {
-            const isActive = activeDocId === doc.id
-
-            return (
-              <StaggerItem key={doc.id} variants={scaleIn}>
-                <button
-                  type="button"
-                  onClick={() => setActiveDocId(doc.id)}
-                  className={cn(
-                    "group w-full text-left p-6 rounded-2xl bg-card border transition-all duration-300 h-full flex flex-col",
-                    isActive
-                      ? "border-primary shadow-lg shadow-primary/10"
-                      : "border-border hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10"
-                  )}
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
-                      <doc.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <span className="px-2 py-1 rounded-md bg-primary/10 text-xs font-medium text-primary">
-                      PDF
-                    </span>
+        <StaggerContainer className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 max-w-5xl mx-auto">
+          {projectDocuments.map((doc) => (
+            <StaggerItem key={doc.id} variants={scaleIn}>
+              <button
+                type="button"
+                onClick={() => setActiveDocId(doc.id)}
+                className={cn(
+                  "group w-full text-left rounded-2xl bg-card border border-border",
+                  "p-5 sm:p-6 transition-all duration-300",
+                  "hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10",
+                  "active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                )}
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors duration-300">
+                    <doc.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                   </div>
 
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
-                    {doc.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-2 flex-1">
-                    {doc.description}
-                  </p>
-                  <p className="text-xs font-mono text-muted-foreground mb-4">
-                    {doc.fileName}
-                  </p>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-2 mb-1">
+                      <h3 className="text-base sm:text-lg font-semibold text-foreground leading-snug">
+                        {doc.title}
+                      </h3>
+                      <span className="shrink-0 px-2 py-0.5 rounded-md bg-primary/10 text-[10px] sm:text-xs font-medium text-primary uppercase tracking-wide">
+                        PDF
+                      </span>
+                    </div>
+                    <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
+                      {doc.description}
+                    </p>
+                    <p className="text-[11px] sm:text-xs font-mono text-muted-foreground truncate mb-4">
+                      {doc.fileName}
+                    </p>
 
-                  <span className="inline-flex items-center gap-2 text-sm font-medium text-primary">
-                    <FileText className="w-4 h-4" />
-                    {isActive ? "Visualizando" : "Visualizar PDF"}
-                  </span>
-                </button>
-              </StaggerItem>
-            )
-          })}
+                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary group-hover:gap-2.5 transition-all duration-300">
+                      <FileText className="w-4 h-4 shrink-0" />
+                      Visualizar PDF
+                      <ChevronRight className="w-4 h-4 shrink-0 opacity-70" />
+                    </span>
+                  </div>
+                </div>
+              </button>
+            </StaggerItem>
+          ))}
         </StaggerContainer>
-
-        {activeDoc && (
-          <SectionReveal delay={0.1} className="max-w-5xl mx-auto mt-12">
-            <div className="rounded-2xl border border-border bg-card overflow-hidden">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 border-b border-border">
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {activeDoc.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">{activeDoc.fileName}</p>
-                </div>
-                <div className="flex items-center gap-2 shrink-0">
-                  <Button asChild variant="outline" size="sm" className="gap-2">
-                    <Link
-                      href={activeDoc.viewUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      Abrir no Drive
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon-sm"
-                    onClick={() => setActiveDocId(null)}
-                    aria-label="Fechar visualizador"
-                  >
-                    <X className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-
-              <div className="relative w-full h-[75vh] min-h-[480px] bg-secondary">
-                <iframe
-                  src={activeDoc.embedUrl}
-                  title={activeDoc.title}
-                  allow="autoplay"
-                  className="absolute inset-0 w-full h-full"
-                />
-              </div>
-            </div>
-          </SectionReveal>
-        )}
       </div>
+
+      <PdfViewerDialog
+        document={activeDoc}
+        open={activeDocId !== null}
+        onOpenChange={(open) => {
+          if (!open) setActiveDocId(null)
+        }}
+      />
     </section>
   )
 }
