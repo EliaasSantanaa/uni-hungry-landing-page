@@ -4,6 +4,7 @@ import { About } from "@/components/landing/about"
 import { Team } from "@/components/landing/team"
 import { VideoSection } from "@/components/landing/video-section"
 import { TechStack } from "@/components/landing/tech-stack"
+import { ChatbotSection } from "@/components/landing/chatbot-section"
 import { Repositories } from "@/components/landing/repositories"
 import { Documentation } from "@/components/landing/documentation"
 import { Footer } from "@/components/landing/footer"
@@ -17,6 +18,7 @@ export default function HomePage() {
       <Team />
       <VideoSection />
       <TechStack />
+      <ChatbotSection />
       <Repositories />
       <Documentation />
       <Footer />

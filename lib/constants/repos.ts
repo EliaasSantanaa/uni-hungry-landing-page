@@ -48,6 +48,19 @@ export const repositories: Repository[] = [
     previewUrl:
       "https://opengraph.githubassets.com/1/EliaasSantanaa/uni-hungry-server",
   },
+  {
+    name: "uni-hungry-chatbot",
+    owner: "EliaasSantanaa",
+    title: "Assistente Web",
+    description:
+      "Chatbot com IA para tirar dúvidas sobre restaurantes, mesas, cardápio e vendas — conectado ao backend UniHungry.",
+    tech: ["Next.js 16", "React 19", "Framer Motion", "TypeScript"],
+    language: "TypeScript",
+    url: "https://github.com/EliaasSantanaa/uni-hungry-chatbot",
+    previewUrl:
+      "https://opengraph.githubassets.com/1/EliaasSantanaa/uni-hungry-chatbot",
+    liveUrl: "https://chat.unihungry.com.br",
+  },
 ]
 
 export function getRepositoryByName(name: string) {

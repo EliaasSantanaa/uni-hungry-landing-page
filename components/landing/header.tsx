@@ -12,6 +12,7 @@ const navItems = [
   { label: "Equipe", href: "#equipe" },
   { label: "Vídeo Pitch", href: "#video" },
   { label: "Tecnologias", href: "#tecnologias" },
+  { label: "Assistente", href: "#assistente" },
   { label: "Repositórios", href: "#repositorios" },
   { label: "Documentação", href: "#documentacao" },
 ]

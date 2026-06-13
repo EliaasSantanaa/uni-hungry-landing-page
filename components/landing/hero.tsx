@@ -1,11 +1,12 @@
 "use client"
 
 import { motion, useScroll, useTransform } from "framer-motion"
-import { ArrowDown, Play } from "lucide-react"
+import { ArrowDown, MessageCircle, Play } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { useRef } from "react"
 import { fadeIn, fadeUp } from "@/components/landing/section-reveal"
+import { CHATBOT } from "@/lib/constants/chatbot"
 
 export function Hero() {
   const ref = useRef(null)
@@ -88,6 +89,12 @@ export function Hero() {
             </Button>
             <Button asChild variant="outline" size="lg">
               <Link href="#repositorios">Ver Repositórios</Link>
+            </Button>
+            <Button asChild variant="secondary" size="lg" className="gap-2">
+              <Link href={CHATBOT.url} target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="w-4 h-4" />
+                Assistente IA
+              </Link>
             </Button>
           </motion.div>
         </motion.div>

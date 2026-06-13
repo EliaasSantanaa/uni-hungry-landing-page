@@ -24,7 +24,7 @@ export function Repositories() {
           </p>
         </SectionReveal>
 
-        <StaggerContainer className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <StaggerContainer className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {repositories.map((repo, index) => (
             <StaggerItem
               key={repo.name}

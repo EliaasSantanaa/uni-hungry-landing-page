@@ -21,6 +21,9 @@ export function Footer() {
             <Link href="#tecnologias" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Tecnologias
             </Link>
+            <Link href="#assistente" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              Assistente
+            </Link>
             <Link href="#repositorios" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Repositórios
             </Link>

@@ -66,6 +66,14 @@ export function RepositoryCard({ repo }: RepositoryCardProps) {
               Ver repositório
             </Link>
           </Button>
+          {repo.liveUrl ? (
+            <Button asChild variant="outline" className="flex-1 gap-2">
+              <Link href={repo.liveUrl} target="_blank" rel="noopener noreferrer">
+                <Globe className="w-4 h-4" />
+                Ver demo
+              </Link>
+            </Button>
+          ) : null}
         </div>
       </div>
     </article>

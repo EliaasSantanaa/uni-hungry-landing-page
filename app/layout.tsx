@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/theme-provider'
-import { WhatsAppChatWidget } from '@/components/landing/whatsapp-chat-widget'
+import { ChatbotWidget } from '@/components/landing/chatbot-widget'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
@@ -47,7 +47,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
-          <WhatsAppChatWidget />
+          <ChatbotWidget />
         </ThemeProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
